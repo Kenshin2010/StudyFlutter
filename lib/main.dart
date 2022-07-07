@@ -6,17 +6,81 @@ import 'package:english_words/english_words.dart';
 // hot reload
 // template source: https://flutterstudio.app/
 
-void main() => runApp(MyApp());
+void main() => runApp( MyApp());
 
 
+class MyApp extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return  MaterialApp(
+      title: "test",
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Test List View")
+      ),
+        body: const Center(
+          child: CustomListView(),
+        ),
+    ));
+  }
 
+}
 
+class CustomListView extends StatefulWidget {
+  const CustomListView({Key? key}) : super(key: key);
 
+  @override
+  State<StatefulWidget> createState() {
+    return ListItemState();
+  }
+}
 
+class ListItemState extends State<CustomListView> {
 
+  final List<WordPair> _word = <WordPair>[];
+  final _biggerFont = const TextStyle(fontSize: 18);
+  final Set<WordPair> _saved = <WordPair>{};
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("test"),
+      ),
+      body: Center(
+        child: ListView.builder(itemBuilder: (context, index) {
+          if (index.isOdd) return const Divider();
+          if (index >= _word.length) {
+            _word.addAll(generateWordPairs().take(10));
+          }
+          return _buildRow(_word[index]);
+        }),
+      ),
+    );
+  }
 
+  Widget _buildRow(WordPair wordPair) {
+    final bool already = _saved.contains(wordPair);
+    return ListTile(
+        title: Text(
+          wordPair.asPascalCase,
+          style: _biggerFont),
+        trailing: Icon(already ? Icons.favorite : Icons.favorite_border,
+            color: already ? Colors.red : null),
+      onTap: (){
+          setState((){
+            if(already){
+              _saved.remove(wordPair);
+            }else{
+              _saved.add(wordPair);
+            }
+          });
+      },
 
+    );
+  }
+
+}
 
 
 // class MyApp extends StatelessWidget{
