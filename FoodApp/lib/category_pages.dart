@@ -4,6 +4,7 @@ import 'package:foodproject/CategoryItem.dart';
 import 'fake_data.dart';
 
 class CategoryPage extends StatelessWidget{
+  static const String route = '/CategoryPage';
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

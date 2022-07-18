@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.cyan,
-        fontFamily: 'Parisienne',
+        // fontFamily: 'Parisienne',
         textTheme: const TextTheme(
           headline1: TextStyle(
               fontSize: 20.0,
