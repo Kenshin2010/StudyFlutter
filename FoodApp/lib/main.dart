@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodproject/foods_page.dart';
 import 'category_pages.dart';
 
 void main() => runApp(const MyApp());
@@ -11,6 +12,11 @@ class MyApp extends StatelessWidget {
     // TODO: implement build
     return MaterialApp(
       title: 'Food App',
+      initialRoute: '/',
+      routes: {
+        FoodsPage.routeName : (context) => FoodsPage(),
+        CategoryPage.route : (context) => CategoryPage()
+      },
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.cyan,
@@ -26,7 +32,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('List Food'),
+          title: const Text('List Food', style: TextStyle(fontFamily: 'Parisienne'),),
           titleTextStyle: const TextStyle(color: Colors.white, fontSize: 20),
         ),
         body: SafeArea(child: CategoryPage()),
