@@ -9,7 +9,7 @@ class CounterBloc extends Bloc<CounterEvent, int> {
 
   @override
   Stream<int> mapEventToState(CounterEvent event) async*{
-    print(state);//this is "current state"
+    print(state);//this is "current view"
     //You must have UI to send Event(by pressing buttons)
     switch(event) {
       case CounterEvent.increment:
