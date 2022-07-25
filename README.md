@@ -15,3 +15,7 @@ FIX FIREBASE
 => Uncomment #platform :ios, '9.0' Then change the version to 10 platform :ios, '10.0'
 => GÕ TERMINAL ROOT LÀ PATH IOS: 'arch -x86_64 pod repo update'
 CUỐI CÙNG CHẠY LỆNH SAU: 'arch -x86_64 pod update' or 'arch -x86_64 pod install'
+
+
+
+link tham khảo: https://stackoverflow.com/questions/69248840/flutter-cocoapods-could-not-find-compatible-versions-for-pod-firebasecore
