@@ -4,7 +4,7 @@
 
 
 
-FIX LỖI FIREBASE TRÊN MAC M1
+FIX FIREBASE
 - XOÁ HẾT COCOAPODS (TERMINAL)
 => sudo gem uninstall cocoapods
 => sudo gem uninstall cocoapods-downloader
