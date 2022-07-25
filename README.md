@@ -1,6 +1,9 @@
 # StudyFlutter
 
 ========================================
+
+
+
 FIX LỖI FIREBASE TRÊN MAC M1
 - XOÁ HẾT COCOAPODS (TERMINAL)
 => sudo gem uninstall cocoapods
