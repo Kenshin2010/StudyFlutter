@@ -19,3 +19,4 @@ samples, guidance on mobile development, and a full API reference.
 Link tham khảo
 - https://blog.codemagic.io/firebase-authentication-google-sign-in-using-flutter/
 - https://kickertech.com/login-and-register-easily-with-flutter-using-firebase/
+- https://viblo.asia/p/sign-in-google-with-flutter-6J3Zg0XglmB
