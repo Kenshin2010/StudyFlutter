@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,6 +7,9 @@ import 'package:login/component/button.dart';
 import '../constants.dart';
 import 'Home_Screen.dart';
 import 'Register_Screen.dart';
+import 'package:login/component/button_google.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -17,6 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
   String email = '';
   String password = '';
   bool isloading = false;
+
+  GoogleSignInAccount? _userObj = null;
+  GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   return "Please enter Email";
                                 }
                               },
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.left,
                               decoration: kTextFieldDecoration.copyWith(
                                 hintText: 'Email',
                                 prefixIcon: Icon(
@@ -79,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               onChanged: (value) {
                                 password = value;
                               },
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.left,
                               decoration: kTextFieldDecoration.copyWith(
                                   hintText: 'Password',
                                   prefixIcon: Icon(
@@ -132,6 +140,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 }
                               },
                             ),
+                            Padding(padding: EdgeInsets.all(8)),
+                            LoginGoogleButton(ontapp: (){
+                              print("hehe");
+                              _googleSignIn.signIn().then((userData) {
+                                setState(() {
+                                  _userObj = userData;
+                                  print("_userObj: ${jsonEncode(_userObj)}");
+
+                                });
+                              }).catchError((e) {
+                                print(e);
+                              });
+                            }),
                             SizedBox(height: 30),
                             GestureDetector(
                               onTap: () {
