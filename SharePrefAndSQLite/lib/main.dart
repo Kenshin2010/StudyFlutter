@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _DataLocalState extends State<MyApp> {
   String? _content = '';
-  // final _fo√rmKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -51,30 +51,31 @@ class _DataLocalState extends State<MyApp> {
               title: Text('Data local'),
             ),
             body: Form(
+                key: _formKey,
                 child: Container(
-                    // key: _formKey,
-                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
                     child: Column(
                       children: [
                         Padding(padding: EdgeInsets.symmetric(vertical: 100)),
                         TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please enter content";
+                            }
+                            return null;
+                          },
                           style: TextStyle(fontSize: 30),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             _content = value;
                           },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please enter content";
-                            }
-                          },
                         ),
                         Padding(padding: EdgeInsets.symmetric(vertical: 20)),
                         ElevatedButton(
                           onPressed: () {
-                            // if (_formKey.currentState!.validate()) {
+                            if (_formKey.currentState!.validate()) {
                               _setContent();
-                            // }
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.green, // background
