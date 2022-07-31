@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../theme/app_themes.dart';
+import '../screen/search_home.dart';
+
+// source github tham khao:
+// https://github.com/rrafush/weather_app
+// https://github.com/rrafush/weather_app
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +17,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Weather App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        )
-      );
+        debugShowCheckedModeBanner: false,
+        title: 'Weather App',
+        theme: AppThemes.appTheme,
+        home: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child: Scaffold(
+            body: SearchHome()
+          ),
+        ));
   }
 }
-
