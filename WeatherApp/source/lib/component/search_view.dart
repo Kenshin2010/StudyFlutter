@@ -28,7 +28,7 @@ class SearchState extends State<SearchView> {
             child: Container(
               height: 40,
               decoration: BoxDecoration(
-                  color: Colors.white30,
+                  color: Colors.white30.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(20)),
               child: TextField(
                 controller: myController,
