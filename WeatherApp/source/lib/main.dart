@@ -5,8 +5,7 @@ import '../screen/search_home.dart';
 
 // source github tham khao:
 // https://github.com/rrafush/weather_app
-// https://github.com/rrafush/weather_app
-
+// https://github.com/codestronaut/flutter-weather-app-sample
 void main() {
   runApp(const MyApp());
 }

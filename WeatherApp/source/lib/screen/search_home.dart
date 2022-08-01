@@ -11,6 +11,7 @@ class SearchHome extends StatefulWidget{
 }
 
 class SearchState extends State<SearchHome>{
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -25,9 +26,16 @@ class SearchState extends State<SearchHome>{
         ),
         Column(
           children: [
-            const Padding(padding: EdgeInsets.symmetric(vertical: 50)),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
             SearchView(),
-
+            const SizedBox(height: 80),
+            const Image(image: AssetImage('assets/welcome.png')),
+            const SizedBox(height: 50),
+            Text('Write the name of a city to know the weather \n in that city!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.white.withOpacity(0.5)
+            ))
           ],
         )
       ],
