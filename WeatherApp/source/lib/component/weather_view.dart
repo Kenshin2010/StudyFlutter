@@ -16,7 +16,7 @@ class WeatherView extends StatelessWidget {
       child: Column(
         children: [
           Expanded(flex: 3, child: buildToDayView()),
-          const SizedBox(width: double.infinity, height: 30),
+          const SizedBox(width: double.infinity, height: 10),
           Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.only(top: 15, left: 25, bottom: 15),

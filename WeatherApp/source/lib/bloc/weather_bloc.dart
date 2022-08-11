@@ -24,11 +24,11 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           },
         );
       },
-      transformer: debounce(Duration(milliseconds: 500)),
+      transformer: delay(const Duration(milliseconds: 500)),
     );
   }
 
-  EventTransformer<T> debounce<T>(Duration duration) {
+  EventTransformer<T> delay<T>(Duration duration) {
     return (events, mapper) => events.debounceTime(duration).flatMap(mapper);
   }
 }

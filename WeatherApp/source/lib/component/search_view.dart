@@ -53,7 +53,14 @@ class SearchState extends State<SearchView> {
         ElevatedButton(
             // OutlineButton neu khong muon setBackgroundButton
             onPressed: (){
-              context.read<WeatherBloc>().add(OnCityChanged(myController.value.text.trim().replaceAll(' ','%20')));
+              setState(() {
+                if(myController.text.isNotEmpty){
+                  context.read<WeatherBloc>().add(OnCityChanged(myController.value.text.trim().replaceAll(' ','%20')));
+                }else{
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Text is√ not empty"),
+                  ));                }
+              });
             },
             style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
