@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:source_app/theme/app_themes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../theme/app_colors.dart';
+import '../bloc/weather_bloc.dart';
+import '../bloc/weather_event.dart';
 
 class SearchView extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     return SearchState();
@@ -10,6 +13,7 @@ class SearchView extends StatefulWidget {
 }
 
 class SearchState extends State<SearchView> {
+
   final myController = TextEditingController();
 
   @override
@@ -48,7 +52,9 @@ class SearchState extends State<SearchView> {
         const Padding(padding: EdgeInsets.symmetric(horizontal: 8)),
         ElevatedButton(
             // OutlineButton neu khong muon setBackgroundButton
-            onPressed: () {},
+            onPressed: (){
+              context.read<WeatherBloc>().add(OnCityChanged(myController.value.text.trim().replaceAll(' ','%20')));
+            },
             style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
