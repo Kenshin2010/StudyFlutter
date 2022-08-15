@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:app/theme/app_themes.dart';
+import 'package:app/screen/splash/splash_screen.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw MaterialApp(
-      title: "My Dictionary",
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-
-      ),
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Weather App',
+        theme: AppThemes.appTheme,
+        home: const AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child: Scaffold(resizeToAvoidBottomInset: false, body: SplashScreen()),
+        ));
   }
-
 }
