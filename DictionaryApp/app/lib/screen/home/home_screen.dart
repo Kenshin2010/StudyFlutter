@@ -20,7 +20,10 @@ class HomeScreenState extends State<HomeScreen> {
     setState(() => _currentTab = tab);
   }
 
-  final List<Widget> _screens = <Widget>[SearchScreen(), SavedScreen()];
+  final Map<String, Widget> _screens = {
+    'Search Dictionary': SearchScreen(),
+    'Saved Dictionary': SavedScreen()
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,14 @@ class HomeScreenState extends State<HomeScreen> {
         value: SystemUiOverlayStyle.light,
         child: Scaffold(
             resizeToAvoidBottomInset: false,
-            body: Container(child: _screens.elementAt(_currentTab)),
+            appBar: AppBar(
+              elevation: 0,
+              centerTitle: false,
+              title: Text(_screens.keys.elementAt(_currentTab).toUpperCase(),
+              style: const TextStyle(fontSize: 16)),
+              backgroundColor: AppColors.primary,
+            ),
+            body: _screens.values.elementAt(_currentTab),
             bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               selectedFontSize: 16,
@@ -42,10 +52,8 @@ class HomeScreenState extends State<HomeScreen> {
               currentIndex: _currentTab,
               onTap: (index) => _selectTab(index),
               items: const [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.search), label: 'Search'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.save), label: 'Saved'),
+                BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+                BottomNavigationBarItem(icon: Icon(Icons.save), label: 'Saved'),
               ],
             )),
       ),

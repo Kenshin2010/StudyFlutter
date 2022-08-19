@@ -6,7 +6,7 @@ class AppThemes {
   static ThemeData appTheme = ThemeData(
     colorScheme: ColorScheme(
         secondary: AppColors.secondary,
-        onPrimary: AppColors.white,
+        onPrimary: AppColors.primary,
         primary: AppColors.primary,
         brightness: Brightness.dark,
         error: AppColors.lightRed,
@@ -35,6 +35,6 @@ class AppThemes {
         ),
       ),
     ),
-    hintColor: AppColors.white.withOpacity(0.5),
+    hintColor: AppColors.primary.withOpacity(0.5),
   );
 }
