@@ -47,8 +47,11 @@ class SearchViewState extends State<SearchView> {
   }
 }
 
-Widget buildFloatingSearchBar() {
+Widget buildFloatingSearchBar(BuildContext context) {
+  final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
   return FloatingSearchBar(
+    queryStyle: const TextStyle(color: Colors.black),
     borderRadius: const BorderRadius.all(Radius.circular(10)),
     backgroundColor: Colors.white,
     clearQueryOnClose: true,
@@ -58,8 +61,8 @@ Widget buildFloatingSearchBar() {
     transitionDuration: const Duration(milliseconds: 800),
     transitionCurve: Curves.easeInOut,
     physics: const BouncingScrollPhysics(),
-    openAxisAlignment: 0.0,
-    width: 600,
+    axisAlignment: isPortrait ? 0.0 : -1.0,
+    openAxisAlignment: 0.0, width: 600,
     debounceDelay: const Duration(milliseconds: 500),
     onQueryChanged: (query) {
       // CFloatingSearchBarall your model, bloc, controller here.
@@ -81,7 +84,7 @@ Widget buildFloatingSearchBar() {
     builder: (context, transition) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(15),
-        child: Text('Text'),
+        child: const Text('Text'),
       );
     },
   );

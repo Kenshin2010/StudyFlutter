@@ -3,6 +3,7 @@ import 'package:app/theme/app_themes.dart';
 import 'package:app/screen/splash/splash_screen.dart';
 import 'package:flutter/services.dart';
 
+// App tham khao: https://github.com/KathirvelChandrasekaran/dictionary_app
 void main() {
   runApp(MyApp());
 }
