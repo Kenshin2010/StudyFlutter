@@ -4,6 +4,7 @@ import 'package:app/screen/splash/splash_screen.dart';
 import 'package:flutter/services.dart';
 
 // App tham khao: https://github.com/KathirvelChandrasekaran/dictionary_app
+// Link tham khao cho db: https://viblo.asia/p/flutter-sqlite-database-4dbZN1rkKYM
 void main() {
   runApp(MyApp());
 }

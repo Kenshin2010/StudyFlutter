@@ -44,11 +44,12 @@ class HomeScreenState extends State<HomeScreen> {
             ),
             body: _screens.values.elementAt(_currentTab),
             bottomNavigationBar: BottomNavigationBar(
+              elevation: 0,
               type: BottomNavigationBarType.fixed,
               selectedFontSize: 16,
               selectedItemColor: AppColors.primary,
               unselectedItemColor: AppColors.black,
-              backgroundColor: AppColors.backgroundHome,
+              backgroundColor: AppColors.gray,
               currentIndex: _currentTab,
               onTap: (index) => _selectTab(index),
               items: const [

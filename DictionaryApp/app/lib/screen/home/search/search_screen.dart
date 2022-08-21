@@ -1,6 +1,7 @@
 import 'package:app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:app/component/search_view.dart';
+import 'package:app/component/back_ground_view.dart';
 
 class SearchScreen extends StatefulWidget {
 
@@ -16,6 +17,7 @@ class SearchScreenState extends State<SearchScreen>{
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
+      buildBackgroundView(context),
       buildFloatingSearchBar(context)
     ]);
   }
