@@ -25,18 +25,32 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Lottie.asset(
-        'assets/dictionary.json',
-        controller: _controller,
-        height: MediaQuery.of(context).size.height * 1,
-        animate: true,
-        onLoaded: (composition) {
-          _controller
-            ..duration = composition.duration
-            ..forward().whenComplete(() => Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => HomeScreen())));
-        },
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset(
+            'assets/dictionary.json',
+            controller: _controller,
+            animate: true,
+            onLoaded: (composition) {
+              _controller
+                ..duration = composition.duration
+                ..forward().whenComplete(() => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen())));
+            },
+          ),
+          Text(
+            "Dictionary App".toUpperCase(),
+            style: TextStyle(
+              color: AppColors.white,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2,
+            ),
+          ),
+        ],
       ),
     );
   }

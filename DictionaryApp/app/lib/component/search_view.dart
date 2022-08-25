@@ -1,6 +1,11 @@
+import 'package:app/bloc/dictionary_state.dart';
 import 'package:flutter/material.dart';
 import 'package:app/theme/app_colors.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:app/bloc/dictionary_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:app/bloc/dictionary_state.dart';
+import 'package:app/bloc/dictionary_event.dart';
 
 @Deprecated("Không dùng view này nữa")
 class SearchView extends StatefulWidget {
@@ -35,7 +40,7 @@ class SearchViewState extends State<SearchView> {
               filled: true,
               fillColor: AppColors.white,
               border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
               suffixIcon: IconButton(
                   icon: Icon(Icons.clear, color: AppColors.primary),
                   onPressed: () {
@@ -47,9 +52,13 @@ class SearchViewState extends State<SearchView> {
   }
 }
 
-Widget buildFloatingSearchBar(BuildContext context) {
+Widget buildFloatingSearchBar(BuildContext context, DictionaryState state) {
   final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+  return floatingSearchBar(isPortrait, context, state);
+}
 
+FloatingSearchBar floatingSearchBar(
+    bool isPortrait, BuildContext context, DictionaryState state) {
   return FloatingSearchBar(
     queryStyle: const TextStyle(color: Colors.black),
     borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -58,14 +67,24 @@ Widget buildFloatingSearchBar(BuildContext context) {
     backdropColor: Colors.transparent,
     hint: 'Search world',
     scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
-    transitionDuration: const Duration(milliseconds: 800),
+    transitionDuration: const Duration(milliseconds: 500),
     transitionCurve: Curves.easeInOut,
     physics: const BouncingScrollPhysics(),
     axisAlignment: isPortrait ? 0.0 : -1.0,
-    openAxisAlignment: 0.0, width: 600,
+    openAxisAlignment: 0.0,
+    width: 600,
     debounceDelay: const Duration(milliseconds: 500),
     onQueryChanged: (query) {
       // CFloatingSearchBarall your model, bloc, controller here.
+      if (query.trim().isNotEmpty) {
+        context.read<DictionaryBloc>().add(OnWordChange(query));
+      }
+    },
+    onSubmitted: (val) {
+      if (val == "") {
+        print(val);
+        return;
+      } else {}
     },
     transition: CircularFloatingSearchBarTransition(),
     actions: [
@@ -73,7 +92,9 @@ Widget buildFloatingSearchBar(BuildContext context) {
         showIfOpened: false,
         child: CircularButton(
           icon: Icon(Icons.bookmark, color: AppColors.primary),
-          onPressed: () {},
+          onPressed: () {
+            print("search here");
+          },
         ),
       ),
       FloatingSearchBarAction.searchToClear(
@@ -82,10 +103,28 @@ Widget buildFloatingSearchBar(BuildContext context) {
       ),
     ],
     builder: (context, transition) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: const Text('Text'),
-      );
+      return state is DictionaryHasData
+          ? Container(
+        decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(10)
+        ),
+        child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: state.result.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                  title: Text(
+                    state.result[index].word!,
+                    style: TextStyle(color: AppColors.black, fontSize: 18),
+                  ));
+            }),
+      )
+          : const SizedBox();
+
+      // }
+      // );
     },
   );
 }

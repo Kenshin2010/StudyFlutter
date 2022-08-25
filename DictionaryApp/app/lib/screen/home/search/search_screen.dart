@@ -1,7 +1,10 @@
+import 'package:app/bloc/dictionary_bloc.dart';
 import 'package:app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:app/component/search_view.dart';
 import 'package:app/component/back_ground_view.dart';
+import 'package:app/bloc/dictionary_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchScreen extends StatefulWidget {
 
@@ -16,10 +19,17 @@ class SearchScreen extends StatefulWidget {
 class SearchScreenState extends State<SearchScreen>{
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      buildBackgroundView(context),
-      buildFloatingSearchBar(context)
-    ]);
+    return BlocBuilder<DictionaryBloc, DictionaryState>(
+        builder: (context, state) {
+          return  Stack(children: [
+            buildBackgroundView(context, state),
+            buildFloatingSearchBar(context, state)
+          ]);
+        }
+    );
+
+
+
   }
 
 }

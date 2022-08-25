@@ -14,12 +14,18 @@ class DatabaseHelper{
     if (_database != null) {
       return _database;
     } else {
-      _database = await _databaseConnection.getDatabase();
+      _database = await _databaseConnection.init();
       return _database;
     }
   }
 
-  //Insert User
+  getListWord(table, word) async {
+    var connection = await database;
+    // return await connection?.query(table, where: "tu LIKE ?", whereArgs: [word]);
+    return await connection?.query(table, where: "tu LIKE ? LIMIT 10", whereArgs: ['$word%']);
+  }
+
+//Insert User
   insertData(table, data) async {
     var connection = await database;
     return await connection?.insert(table, data);
@@ -49,5 +55,4 @@ class DatabaseHelper{
     var connection = await database;
     return await connection?.rawDelete("delete from $table where id=$itemId");
   }
-
 }
