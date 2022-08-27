@@ -43,7 +43,7 @@ Widget buildLoadingView() {
 Widget handleStateView(DictionaryState state) {
   if (state is DictionaryLoading) {
     return buildLoadingView();
-  } else if (state is DictionaryHasData) {
+  } else if (state is DictionaryComplete) {
     return Center(
         child: Text("Has data",
             style: TextStyle(

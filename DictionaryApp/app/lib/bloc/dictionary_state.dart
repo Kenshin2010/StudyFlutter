@@ -21,10 +21,10 @@ class DictionaryError extends DictionaryState {
   List<Object?> get props => [message];
 }
 
-class DictionaryHasData extends DictionaryState {
+class DictionaryComplete extends DictionaryState {
   final List<Dictionary> result;
 
-  DictionaryHasData(this.result);
+  DictionaryComplete(this.result);
 
   @override
   List<Object?> get props => [result];

@@ -1,3 +1,4 @@
+
 import 'package:app/bloc/dictionary_state.dart';
 import 'package:flutter/material.dart';
 import 'package:app/theme/app_colors.dart';
@@ -6,6 +7,7 @@ import 'package:app/bloc/dictionary_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app/bloc/dictionary_state.dart';
 import 'package:app/bloc/dictionary_event.dart';
+import 'package:flutter/services.dart';
 
 @Deprecated("Không dùng view này nữa")
 class SearchView extends StatefulWidget {
@@ -40,7 +42,7 @@ class SearchViewState extends State<SearchView> {
               filled: true,
               fillColor: AppColors.white,
               border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
               suffixIcon: IconButton(
                   icon: Icon(Icons.clear, color: AppColors.primary),
                   onPressed: () {
@@ -59,7 +61,20 @@ Widget buildFloatingSearchBar(BuildContext context, DictionaryState state) {
 
 FloatingSearchBar floatingSearchBar(
     bool isPortrait, BuildContext context, DictionaryState state) {
+  final myController = FloatingSearchBarController();
+
+  String? getWordByIndex(int index) {
+    return state is DictionaryComplete ? state.result[index].word : "";
+  }
+
+  int getCountListWord(){
+    return state is DictionaryComplete ? state.result.length : 0;
+  }
+
   return FloatingSearchBar(
+    initiallyHidden: false,
+    automaticallyImplyBackButton: false,
+    controller: myController,
     queryStyle: const TextStyle(color: Colors.black),
     borderRadius: const BorderRadius.all(Radius.circular(10)),
     backgroundColor: Colors.white,
@@ -76,8 +91,15 @@ FloatingSearchBar floatingSearchBar(
     debounceDelay: const Duration(milliseconds: 500),
     onQueryChanged: (query) {
       // CFloatingSearchBarall your model, bloc, controller here.
-      if (query.trim().isNotEmpty) {
-        context.read<DictionaryBloc>().add(OnWordChange(query));
+      context.read<DictionaryBloc>().add(OnWordChange(query));
+      if (query.trim().isEmpty) {
+        myController.close();
+      }
+    },
+    onKeyEvent: (KeyEvent keyEvent) {
+      if (keyEvent.logicalKey == LogicalKeyboardKey.escape) {
+        myController.query = "";
+        myController.close();
       }
     },
     onSubmitted: (val) {
@@ -103,25 +125,21 @@ FloatingSearchBar floatingSearchBar(
       ),
     ],
     builder: (context, transition) {
-      return state is DictionaryHasData
-          ? Container(
+      return Container(
         decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(10)
-        ),
+            color: AppColors.white, borderRadius: BorderRadius.circular(10)),
         child: ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            itemCount: state.result.length,
+            itemCount: getCountListWord(),
             itemBuilder: (context, index) {
               return ListTile(
                   title: Text(
-                    state.result[index].word!,
-                    style: TextStyle(color: AppColors.black, fontSize: 18),
-                  ));
+                getWordByIndex(index)!,
+                style: TextStyle(color: AppColors.black, fontSize: 18),
+              ));
             }),
-      )
-          : const SizedBox();
+      );
 
       // }
       // );

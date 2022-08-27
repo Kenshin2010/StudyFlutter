@@ -13,9 +13,12 @@ class RemoteDataSourceImp implements RemoteDataSource {
 
   @override
   Future<List<Dictionary>> getListDictionary(String word) async {
+    List<Dictionary> items = [];
+    if(word.isEmpty){
+      return items;
+    }
     final data = await databaseHelper.getListWord('Dictionary', word);
     if (data != null) {
-      List<Dictionary> items = [];
       data.forEach((result) {
         Dictionary dictionary = Dictionary.fromMap(result);
         items.add(dictionary);
