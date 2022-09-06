@@ -14,27 +14,21 @@ class DictionaryLoading extends DictionaryState {}
 
 class DictionaryError extends DictionaryState {
   final String message;
-
-  DictionaryError(this.message);
-
+  const DictionaryError(this.message);
   @override
   List<Object?> get props => [message];
 }
 
 class DictionaryComplete extends DictionaryState {
   final List<Dictionary> result;
-
-  DictionaryComplete(this.result);
-
+  const DictionaryComplete(this.result);
   @override
   List<Object?> get props => [result];
 }
 
 class DictionaryDetails extends DictionaryState{
-  final List<String> result;
-
-  DictionaryDetails(this.result);
-
+  final Dictionary result;
+  const DictionaryDetails(this.result);
   @override
   List<Object?> get props => [result];
 }

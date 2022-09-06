@@ -1,13 +1,12 @@
-
 import 'package:app/bloc/dictionary_state.dart';
 import 'package:flutter/material.dart';
 import 'package:app/theme/app_colors.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:app/bloc/dictionary_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:app/bloc/dictionary_state.dart';
 import 'package:app/bloc/dictionary_event.dart';
 import 'package:flutter/services.dart';
+import 'package:app/model/dictionary.dart';
 
 @Deprecated("Không dùng view này nữa")
 class SearchView extends StatefulWidget {
@@ -67,7 +66,11 @@ FloatingSearchBar floatingSearchBar(
     return state is DictionaryComplete ? state.result[index].word : "";
   }
 
-  int getCountListWord(){
+  Dictionary? getDictionaryByIndex(int index) {
+    return state is DictionaryComplete ? state.result[index] : null;
+  }
+
+  int getCountListWord() {
     return state is DictionaryComplete ? state.result.length : 0;
   }
 
@@ -133,11 +136,21 @@ FloatingSearchBar floatingSearchBar(
             shrinkWrap: true,
             itemCount: getCountListWord(),
             itemBuilder: (context, index) {
-              return ListTile(
-                  title: Text(
-                getWordByIndex(index)!,
-                style: TextStyle(color: AppColors.black, fontSize: 18),
-              ));
+              return GestureDetector(
+                child: ListTile(
+                    title: Text(
+                  getWordByIndex(index)!,
+                  style: TextStyle(color: AppColors.black, fontSize: 18),
+                )),
+                onTap: () {
+                  var dictionary = getDictionaryByIndex(index);
+                  if (dictionary != null) {
+                    context
+                        .read<DictionaryBloc>()
+                        .add(OnWordDetail(dictionary));
+                  }
+                },
+              );
             }),
       );
 

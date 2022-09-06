@@ -1,9 +1,8 @@
 import 'package:app/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:app/bloc/dictionary_state.dart';
-import 'package:app/bloc/dictionary_bloc.dart';
-import 'package:app/bloc/dictionary_event.dart';
 import 'package:flutter/material.dart';
+import 'package:app/model/dictionary.dart';
 
 Widget buildBackgroundView(BuildContext context, DictionaryState state) {
   return Container(
@@ -27,25 +26,40 @@ Widget buildBackgroundView(BuildContext context, DictionaryState state) {
 }
 
 Widget handleStateView(DictionaryState state) {
-  if (state is DictionaryComplete) {
-    return Text("Empty data. Please enter word",
-        style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: AppColors.primary,
-            fontSize: 18));
-  } else if (state is DictionaryEmpty) {
+  if (state is DictionaryDetails) {
+    var result = state.result;
     return Wrap(
       spacing: 20,
-      children: [buildCardWord()],
+      children: [buildCardWord(result)]
     );
+  } else if (state is DictionaryEmpty) {
+    return BuildTextEmpty();
   } else {
-    return SizedBox();
+    return const SizedBox();
   }
 }
 
-Card buildCardWord() {
+class BuildTextEmpty extends StatelessWidget {
+  const BuildTextEmpty({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text("Empty data.\n Please enter the word",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
+              fontSize: 18)),
+    );
+  }
+}
+
+Card buildCardWord(Dictionary result) {
   return Card(
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       margin: EdgeInsets.only(left: 20, right: 20, top: 50),
       elevation: 5,
@@ -53,22 +67,11 @@ Card buildCardWord() {
       child: Column(
         children: [
           SizedBox(height: 30),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Hello",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.black,
-                      fontSize: 18)),
-              SizedBox(width: 10),
-              Text('/dasdsada/',
-                  style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      color: AppColors.black,
-                      fontSize: 16))
-            ],
-          ),
+          Text(result.word!,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.black,
+                  fontSize: 24)),
           SizedBox(height: 40),
           Row(
             children: [
@@ -123,7 +126,7 @@ Card buildCardWord() {
           ),
           SizedBox(height: 30),
           Text(
-              "I've no idea what time the train leaves. Ask the guard whether he knows",
+              result.mean!,
               style: TextStyle(color: AppColors.primary),
               textAlign: TextAlign.center),
           SizedBox(height: 30)

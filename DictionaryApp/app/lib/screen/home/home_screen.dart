@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app/theme/app_colors.dart';
 import 'package:app/theme/app_themes.dart';
 import 'package:flutter/services.dart';
-import 'package:app/constants/Constants.dart';
+import 'package:app/constants/constants.dart';
 import 'package:app/screen/home/saved/saved_screen.dart';
 import 'package:app/screen/home/search/search_screen.dart';
 

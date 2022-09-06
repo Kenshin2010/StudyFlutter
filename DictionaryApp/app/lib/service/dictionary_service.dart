@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:app/db_helper/database_helper.dart';
-import 'package:app/model/dictionary.dart';
-import 'package:app/constants/Constants.dart';
+import 'package:app/constants/constants.dart';
 
 class DictionaryService {
   late DatabaseHelper _databaseHelper;

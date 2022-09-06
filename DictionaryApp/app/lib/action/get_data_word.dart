@@ -3,11 +3,11 @@ import 'package:app/model/dictionary.dart';
 import 'package:dartz/dartz.dart';
 import '../service/exception/failure.dart';
 
-class GetListWord{
+class GetDataWord{
 
   final DictionaryRepository repository;
 
-  GetListWord(this.repository);
+  GetDataWord(this.repository);
 
   Future<Either<Failure, List<Dictionary>>> execute(String word) {
     return repository.getListDictionary(word);

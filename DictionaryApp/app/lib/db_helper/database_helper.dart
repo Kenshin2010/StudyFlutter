@@ -19,6 +19,7 @@ class DatabaseHelper{
     }
   }
 
+  //SELECT * FROM Dictionary  WHERE  tu LIKE  "he%"
   getListWord(table, word) async {
     var connection = await database;
     // return await connection?.query(table, where: "tu LIKE ?", whereArgs: [word]);

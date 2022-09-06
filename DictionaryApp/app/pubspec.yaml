@@ -41,7 +41,6 @@ dependencies:
   flutter_bloc: ^8.0.1
   rxdart: ^0.27.3
   get_it: ^7.2.0
-  dependencies:
   sqflite: ^2.0.3
   material_floating_search_bar: ^0.3.7
   path_provider: ^2.0.11
