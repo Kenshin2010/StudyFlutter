@@ -29,3 +29,12 @@ class DictionaryComplete extends DictionaryState {
   @override
   List<Object?> get props => [result];
 }
+
+class DictionaryDetails extends DictionaryState{
+  final List<String> result;
+
+  DictionaryDetails(this.result);
+
+  @override
+  List<Object?> get props => [result];
+}
