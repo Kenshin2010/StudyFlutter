@@ -22,7 +22,7 @@ class DictionaryBloc extends Bloc<DictionaryEvent, DictionaryState> {
           emit(DictionaryComplete(data));
         });
       },
-      transformer: delay(const Duration(milliseconds: 500)),
+      transformer: delay(const Duration(milliseconds: 200)),
     );
 
     /**
