@@ -19,7 +19,11 @@ class DictionaryBloc extends Bloc<DictionaryEvent, DictionaryState> {
         result.fold((failure) {
           emit(DictionaryError(failure.message));
         }, (data) {
-          emit(DictionaryComplete(data));
+          if(data.isEmpty){
+            emit(DictionaryEmpty());
+          }else{
+            emit(DictionaryComplete(data));
+          }
         });
       },
       transformer: delay(const Duration(milliseconds: 200)),
