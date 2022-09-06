@@ -28,12 +28,11 @@ Widget buildBackgroundView(BuildContext context, DictionaryState state) {
 Widget handleStateView(DictionaryState state) {
   if (state is DictionaryDetails) {
     var result = state.result;
-    return Wrap(
-      spacing: 20,
-      children: [buildCardWord(result)]
-    );
+    return Wrap(spacing: 20, children: [buildCardWord(result)]);
   } else if (state is DictionaryEmpty) {
-    return BuildTextEmpty();
+    return const BuildTextEmpty();
+  } else if(state is DictionaryComplete){
+    return const BuildTextSelectWord();
   } else {
     return const SizedBox();
   }
@@ -48,6 +47,24 @@ class BuildTextEmpty extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text("Empty data.\n Please enter the word",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
+              fontSize: 18)),
+    );
+  }
+}
+
+class BuildTextSelectWord extends StatelessWidget {
+  const BuildTextSelectWord({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text("Choose a word to see details",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -125,8 +142,7 @@ Card buildCardWord(Dictionary result) {
             ],
           ),
           SizedBox(height: 30),
-          Text(
-              result.mean!,
+          Text(result.mean!,
               style: TextStyle(color: AppColors.primary),
               textAlign: TextAlign.center),
           SizedBox(height: 30)
