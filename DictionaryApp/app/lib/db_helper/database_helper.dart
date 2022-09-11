@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:app/constants/constants.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:app/db_helper/database_connection.dart';
 
@@ -19,6 +20,16 @@ class DatabaseHelper{
     }
   }
 
+  static Database? _wordDB;
+  Future<Database?> get wordDB async {
+    if (_wordDB != null) {
+      return _wordDB;
+    } else {
+      _wordDB = await _databaseConnection.setDatabase();
+      return _wordDB;
+    }
+  }
+
   //SELECT * FROM Dictionary  WHERE  tu LIKE  "he%"
   getListWord(table, word) async {
     var connection = await database;
@@ -26,16 +37,18 @@ class DatabaseHelper{
     return await connection?.query(table, where: "tu LIKE ? LIMIT 10", whereArgs: ['$word%']);
   }
 
-//Insert User
-  insertData(table, data) async {
-    var connection = await database;
-    return await connection?.insert(table, data);
+  //save word
+  save(data) async {
+    var connection = await wordDB;
+    return await connection?.insert(Constants.TABLE_WORD, data);
+    // var connection = await database;
+    // return await connection?.insert(table, data);
   }
 
   //Read All Record
-  readData(table) async {
-    var connection = await database;
-    return await connection?.query(table);
+  getAll() async {
+    var connection = await wordDB;
+    return await connection?.query(Constants.TABLE_WORD);
   }
 
   //Read a Single Record By ID

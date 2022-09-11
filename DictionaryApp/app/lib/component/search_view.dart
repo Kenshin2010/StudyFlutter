@@ -6,7 +6,7 @@ import 'package:app/bloc/dictionary_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app/bloc/dictionary_event.dart';
 import 'package:flutter/services.dart';
-import 'package:app/model/dictionary.dart';
+import 'package:app/model/word.dart';
 
 @Deprecated("Không dùng view này nữa")
 class SearchView extends StatefulWidget {
@@ -66,7 +66,7 @@ FloatingSearchBar floatingSearchBar(
     return state is DictionaryComplete ? state.result[index].word : "";
   }
 
-  Dictionary? getDictionaryByIndex(int index) {
+  Word? getDictionaryByIndex(int index) {
     return state is DictionaryComplete ? state.result[index] : null;
   }
 
@@ -81,7 +81,7 @@ FloatingSearchBar floatingSearchBar(
     queryStyle: const TextStyle(color: Colors.black),
     borderRadius: const BorderRadius.all(Radius.circular(10)),
     backgroundColor: Colors.white,
-    clearQueryOnClose: true,
+    clearQueryOnClose: false,
     backdropColor: Colors.transparent,
     hint: 'Search world',
     scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),

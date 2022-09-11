@@ -1,4 +1,4 @@
-import 'package:app/model/dictionary.dart';
+import 'package:app/model/word.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class DictionaryState extends Equatable {
@@ -20,15 +20,23 @@ class DictionaryError extends DictionaryState {
 }
 
 class DictionaryComplete extends DictionaryState {
-  final List<Dictionary> result;
+  final List<Word> result;
   const DictionaryComplete(this.result);
   @override
   List<Object?> get props => [result];
 }
 
 class DictionaryDetails extends DictionaryState{
-  final Dictionary result;
+  final Word result;
   const DictionaryDetails(this.result);
-  @override
-  List<Object?> get props => [result];
+}
+
+class SavedWord extends DictionaryState{
+  final Word word;
+  const SavedWord(this.word);
+}
+
+class DictionaryAllData extends DictionaryState{
+  final List<Word> words;
+  const DictionaryAllData(this.words);
 }

@@ -1,4 +1,4 @@
-import 'package:app/model/dictionary.dart';
+import 'package:app/model/word.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class DictionaryEvent extends Equatable {
@@ -15,6 +15,15 @@ class OnWordChange extends DictionaryEvent {
 }
 
 class OnWordDetail extends DictionaryEvent {
-  final Dictionary dictionary;
+  final Word dictionary;
   const OnWordDetail(this.dictionary);
+}
+
+class OnClickSave extends DictionaryEvent{
+  final Word word;
+  const OnClickSave(this.word);
+}
+
+class onGetListSaved extends DictionaryEvent{
+  const onGetListSaved();
 }
