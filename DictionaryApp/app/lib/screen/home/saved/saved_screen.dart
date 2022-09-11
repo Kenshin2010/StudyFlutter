@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:app/bloc/dictionary_state.dart';
 import 'package:app/bloc/dictionary_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:app/component/item_word.dart';
 import 'package:app/component/list_word_view.dart';
 import 'package:app/model/word.dart';
 import 'package:app/bloc/dictionary_event.dart';
@@ -39,12 +38,6 @@ class SavedState extends State {
         buildListWordSaved(context, state)
       ]);
     });
-  }
-
-  Widget buildListWordSaved(BuildContext context, DictionaryState state) {
-    return Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
-        child: buildListWordSaved(context, state));
   }
 
   Widget buildBackgroundView(BuildContext context) {
