@@ -24,6 +24,9 @@ class AppThemes {
     fontFamily: GoogleFonts.montserrat().fontFamily,
     brightness: Brightness.dark,
     primaryColor: AppColors.primary,
+    scrollbarTheme: ScrollbarThemeData(
+      thumbVisibility: MaterialStateProperty.all<bool>(true),
+    ),
     scaffoldBackgroundColor: AppColors.primary, // set color background screen
     //fontFamily: 'montserrat',
     elevatedButtonTheme: ElevatedButtonThemeData(

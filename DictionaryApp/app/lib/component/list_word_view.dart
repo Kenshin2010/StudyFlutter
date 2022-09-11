@@ -16,11 +16,14 @@ Widget buildListWordSaved(BuildContext context, DictionaryState state) {
 
   return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
-      child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: getCountListWord(state),
-          itemBuilder: (context, index) {
-            return ItemWord(getDictionaryByIndex(index, state)!);
-          }));
+      child: Scrollbar(
+        thumbVisibility: true,
+        child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: getCountListWord(state),
+            itemBuilder: (context, index) {
+              return ItemWord(getDictionaryByIndex(index, state)!);
+            }),
+      ));
 }

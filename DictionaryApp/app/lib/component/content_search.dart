@@ -32,14 +32,12 @@ Widget buildContent(BuildContext context, DictionaryState state) {
 Widget handleStateView(DictionaryState state, BuildContext context) {
   if (state is DictionaryDetails) {
     var result = state.result;
-    return Wrap(spacing: 20, children: [
-      Column(
-        children: [
-          const SizedBox(height: 30),
-          ItemWord(result)
-        ]
-      )
-    ]);
+    return Scrollbar(
+        thumbVisibility: true,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(children: [const SizedBox(height: 30), ItemWord(result)]),
+        ));
   } else if (state is DictionaryEmpty) {
     return const BuildTextEmpty();
   } else if (state is DictionaryComplete) {
