@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:app/constants/constants.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:app/db_helper/database_connection.dart';
+import 'package:app/model/word.dart';
 
 class DatabaseHelper{
 
@@ -20,16 +21,6 @@ class DatabaseHelper{
     }
   }
 
-  static Database? _wordDB;
-  Future<Database?> get wordDB async {
-    if (_wordDB != null) {
-      return _wordDB;
-    } else {
-      _wordDB = await _databaseConnection.setDatabase();
-      return _wordDB;
-    }
-  }
-
   //SELECT * FROM Dictionary  WHERE  tu LIKE  "he%"
   getListWord(table, word) async {
     var connection = await database;
@@ -38,35 +29,32 @@ class DatabaseHelper{
   }
 
   //save word
-  save(data) async {
-    var connection = await wordDB;
-    return await connection?.insert(Constants.TABLE_WORD, data);
+  save(data, id) async {
+    var connection = await database;
+    return await connection?.update(
+        Constants.TABLE_DICTIONARY,
+        data,
+        where: 'id = ?',
+        whereArgs: [id]);
     // var connection = await database;
     // return await connection?.insert(table, data);
   }
 
   //Read All Record
   getAll() async {
-    var connection = await wordDB;
-    return await connection?.query(Constants.TABLE_WORD);
+    var connection = await database;
+    return await connection?.query(Constants.TABLE_DICTIONARY, where: "isSaved LIKE ?", whereArgs: ['1']);
   }
 
   //Read a Single Record By ID
-  readDataById(table, itemId) async {
+  getWordByID(itemId) async {
     var connection = await database;
-    return await connection?.query(table, where: 'id=?', whereArgs: [itemId]);
-  }
+    var res = await connection?.query(Constants.TABLE_DICTIONARY, where: 'id=?', whereArgs: [itemId]);
+    if(res != null) {
+      return res.isNotEmpty ? Word.fromMap(res.first) : null;
+    } else {
+      return null;
+    }
 
-  //Update User
-  updateData(table, data) async {
-    var connection = await database;
-    return await connection
-        ?.update(table, data, where: 'id=?', whereArgs: [data['id']]);
-  }
-
-  //Delete User
-  deleteDataById(table, itemId) async {
-    var connection = await database;
-    return await connection?.rawDelete("delete from $table where id=$itemId");
   }
 }

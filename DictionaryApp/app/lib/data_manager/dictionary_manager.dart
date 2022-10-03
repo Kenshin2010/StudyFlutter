@@ -13,7 +13,7 @@ class DictionaryManager{
     return repository.getListDictionary(word);
   }
 
-  Future<Either<Failure, bool>> save(Word word) {
+  Future<Either<Failure, Word>> save(Word word) {
     return repository.save(word);
   }
 

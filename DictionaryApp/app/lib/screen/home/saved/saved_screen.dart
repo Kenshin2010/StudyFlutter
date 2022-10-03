@@ -15,12 +15,29 @@ class SavedScreen extends StatefulWidget {
 }
 
 class SavedState extends State {
-  Word? getDictionaryByIndex(int index, DictionaryState state) {
-    return state is DictionaryAllData ? state.words[index] : null;
+
+  List<Word> list = List.empty();
+
+  List<Word> getListWordByState(DictionaryState state){
+    if(state is DictionaryAllData){
+      list = state.words;
+    }else if(state is DictionarySave){
+      Word word = state.result;
+      int index = getIndexById(word);
+      if(index != -1){
+        list.removeAt(index);
+      }
+    }
+    return list;
   }
 
-  int getCountListWord(DictionaryState state) {
-    return state is DictionaryAllData ? state.words.length : 0;
+  int getIndexById(Word word){
+    for(var i=0; i<list.length;i++){
+      if(list[i].id == word.id){
+        return i;
+      }
+    }
+    return -1;
   }
 
   @override
@@ -35,7 +52,7 @@ class SavedState extends State {
         builder: (context, state) {
       return Stack(children: [
         buildBackgroundView(context),
-        buildListWordSaved(context, state)
+        buildListWordSaved(context, getListWordByState(state))
       ]);
     });
   }

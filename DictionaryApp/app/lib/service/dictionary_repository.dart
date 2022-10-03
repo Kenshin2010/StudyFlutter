@@ -4,6 +4,6 @@ import 'package:app/model/word.dart';
 
 abstract class DictionaryRepository {
   Future<Either<Failure, List<Word>>> getListDictionary(String word);
-  Future<Either<Failure, bool>> save(Word word);
+  Future<Either<Failure, Word>> save(Word word);
   Future<Either<Failure, List<Word>>> getAllData();
 }

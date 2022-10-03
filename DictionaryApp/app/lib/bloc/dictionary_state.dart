@@ -31,9 +31,12 @@ class DictionaryDetails extends DictionaryState{
   const DictionaryDetails(this.result);
 }
 
-class SavedWord extends DictionaryState{
-  final Word word;
-  const SavedWord(this.word);
+class DictionarySave extends DictionaryState{
+  final Word result;
+  final int screen;
+  const DictionarySave(this.result, this.screen);
+  @override
+  List<Object?> get props => [result];
 }
 
 class DictionaryAllData extends DictionaryState{

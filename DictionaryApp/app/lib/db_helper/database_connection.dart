@@ -30,19 +30,4 @@ class DatabaseConnection {
     return await openDatabase(path);
     // copy db from asset -> device
   }
-
-
-  Future<Database> setDatabase() async {
-    var directory = await getApplicationDocumentsDirectory();
-    var path = join(directory.path, 'words');
-    var database =
-    await openDatabase(path, version: 1, onCreate: _createWordTable);
-    return database;
-  }
-
-  Future<void> _createWordTable(Database database, int version) async {
-    String sql = "CREATE TABLE Words (id INTEGER PRIMARY KEY,word TEXT,mean Text);";
-    await database.execute(sql);
-  }
-
 }

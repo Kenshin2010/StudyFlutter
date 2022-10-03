@@ -17,11 +17,16 @@ class OnWordChange extends DictionaryEvent {
 class OnWordDetail extends DictionaryEvent {
   final Word dictionary;
   const OnWordDetail(this.dictionary);
+  @override
+  List<Object?> get props => [dictionary];
 }
 
 class OnClickSave extends DictionaryEvent{
   final Word word;
-  const OnClickSave(this.word);
+  final int screen;
+  const OnClickSave(this.word, this.screen);
+  @override
+  List<Object?> get props => [word];
 }
 
 class onGetListSaved extends DictionaryEvent{

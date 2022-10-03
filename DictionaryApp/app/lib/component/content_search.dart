@@ -7,6 +7,7 @@ import 'package:app/bloc/dictionary_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app/bloc/dictionary_event.dart';
 import 'package:app/component/item_word.dart';
+import 'package:app/constants/constants.dart';
 
 Widget buildContent(BuildContext context, DictionaryState state) {
   return Container(
@@ -30,14 +31,21 @@ Widget buildContent(BuildContext context, DictionaryState state) {
 }
 
 Widget handleStateView(DictionaryState state, BuildContext context) {
-  if (state is DictionaryDetails) {
-    var result = state.result;
-    return Scrollbar(
-        thumbVisibility: true,
-        child: SingleChildScrollView(
+
+  Word? getWordByDetail(){
+    return state is DictionaryDetails ? state.result : null;
+  }
+
+  Word? getWordBySave(){
+    return state is DictionarySave ? state.result : null;
+  }
+
+  if (state is DictionaryDetails || (state is DictionarySave && state.screen == Constants.SEARCH_SCREEN)) {
+    var result = state is DictionaryDetails ? getWordByDetail() : getWordBySave();
+    return SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(children: [const SizedBox(height: 30), ItemWord(result)]),
-        ));
+          child: Column(children: [const SizedBox(height: 30), buildCardWord(result!, context,Constants.SEARCH_SCREEN)]),
+       );
   } else if (state is DictionaryEmpty) {
     return const BuildTextEmpty();
   } else if (state is DictionaryComplete) {

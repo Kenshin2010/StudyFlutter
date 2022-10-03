@@ -7,7 +7,7 @@ import 'package:app/db_helper/database_helper.dart';
 
 abstract class RemoteDataSource {
   Future<List<Word>> getListDictionary(String word);
-  Future<bool> save(Word word);
+  Future<Word> save(Word word);
   Future<List<Word>> getAll();
 }
 
@@ -18,7 +18,7 @@ class RemoteDataSourceImp implements RemoteDataSource {
   @override
   Future<List<Word>> getListDictionary(String word) async {
     List<Word> items = [];
-    if(word.isEmpty){
+    if (word.isEmpty) {
       return items;
     }
     final data = await databaseHelper.getListWord('Dictionary', word);
@@ -34,9 +34,16 @@ class RemoteDataSourceImp implements RemoteDataSource {
   }
 
   @override
-  Future<bool> save(Word word) async{
-      int id = await databaseHelper.save(word.toMap());
-      return true;
+  Future<Word> save(Word word) async {
+    Word data = await databaseHelper.getWordByID(word.id);
+    if(data.isSaved == 1){
+      word.isSaved = 0;
+      await databaseHelper.save(word.toMap(), word.id);
+    }else{
+      word.isSaved = 1;
+      await databaseHelper.save(word.toMap(), word.id);
+    }
+    return await databaseHelper.getWordByID(word.id);
   }
 
   @override
@@ -45,7 +52,7 @@ class RemoteDataSourceImp implements RemoteDataSource {
     var data = await databaseHelper.getAll();
     if (data != null) {
       data.forEach((result) {
-        Word dictionary = Word.fromMap2(result);
+        Word dictionary = Word.fromMap(result);
         items.add(dictionary);
       });
       return items;

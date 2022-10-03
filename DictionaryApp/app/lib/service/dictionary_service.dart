@@ -11,7 +11,7 @@ class DictionaryService {
 
   // get list word by word
   getListWord(String word) async{
-    return await _databaseHelper.getListWord(Constants.TABLE_NAME, word);
+    return await _databaseHelper.getListWord(Constants.TABLE_DICTIONARY, word);
   }
 // //Save User
 // SaveUser(Dictionary user) async {

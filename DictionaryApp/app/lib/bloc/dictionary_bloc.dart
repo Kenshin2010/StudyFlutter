@@ -43,6 +43,11 @@ class DictionaryBloc extends Bloc<DictionaryEvent, DictionaryState> {
     on<OnClickSave>((event, item) async {
       var data = event.word;
       final result = await _manager.save(data);
+      result.fold((failure) {
+        emit(DictionaryError(failure.message));
+      }, (item) {
+          emit(DictionarySave(item, event.screen));
+      });
     });
 
     /**

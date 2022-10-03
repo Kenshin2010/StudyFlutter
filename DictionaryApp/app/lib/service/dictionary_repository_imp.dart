@@ -24,7 +24,7 @@ class DictionaryRepositoryImpl implements DictionaryRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> save(Word word) async{
+  Future<Either<Failure, Word>> save(Word word) async{
     try{
       final result = await remoteDataSource.save(word);
       return Right(result);
