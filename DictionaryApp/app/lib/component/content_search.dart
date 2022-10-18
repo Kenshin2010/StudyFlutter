@@ -3,9 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:app/bloc/dictionary_state.dart';
 import 'package:flutter/material.dart';
 import 'package:app/model/word.dart';
-import 'package:app/bloc/dictionary_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:app/bloc/dictionary_event.dart';
 import 'package:app/component/item_word.dart';
 import 'package:app/constants/constants.dart';
 

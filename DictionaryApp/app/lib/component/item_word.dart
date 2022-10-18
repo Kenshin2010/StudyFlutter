@@ -6,50 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:app/theme/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app/bloc/dictionary_event.dart';
-import 'package:app/constants/constants.dart';
 import 'package:text_to_speech/text_to_speech.dart';
-import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_share/flutter_share.dart';
-
-
-// class ItemWord extends StatefulWidget{
-//
-//   Word result;
-//   int screen;
-//
-//   ItemWord(this.result,this.screen, {Key? key}) : super(key: key);
-//
-//   @override
-//   State<StatefulWidget> createState() {
-//     return ItemWordState(result, screen);
-//   }
-//
-// }
-//
-// class ItemWordState extends State{
-//
-//   Word result;
-//   int screen;
-//
-//   ItemWordState(this.result, this.screen);
-//
-//   String getTextSaved(){
-//     if(result.isSaved == null) {
-//       return 'Save';
-//     } else {
-//       return result.isSaved == 0 ? 'Save' : 'Delete';
-//     }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return buildCardWord(result, context);
-//   }
-//
-//
-// }
 
 Card buildCardWord(Word result, BuildContext context, int screen) {
   return Card(

@@ -13,22 +13,4 @@ class DictionaryService {
   getListWord(String word) async{
     return await _databaseHelper.getListWord(Constants.TABLE_DICTIONARY, word);
   }
-// //Save User
-// SaveUser(Dictionary user) async {
-//   return await _repository.insertData('users', user.userMap());
-// }
-//
-// //Read All Users
-// readAllUsers() async {
-//   return await _repository.readData('users');
-// }
-//
-// //Edit User
-// UpdateUser(User user) async {
-//   return await _repository.updateData('users', user.userMap());
-// }
-//
-// deleteUser(userId) async {
-//   return await _repository.deleteDataById('users', userId);
-// }
 }
